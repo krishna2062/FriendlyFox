@@ -85,7 +85,7 @@ router.post('/:id/like', auth, async (req, res) => {
       return res.status(404).json({ message: 'Video not found' });
     }
 
-    const likeIndex = video.likes.indexOf(req.user.id);
+    const likeIndex = video.likes.findIndex(id => id.toString() === req.user.id);
     if (likeIndex > -1) {
       video.likes.splice(likeIndex, 1);
     } else {

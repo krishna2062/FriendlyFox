@@ -38,6 +38,9 @@ app.use((err, req, res, _next) => {
   if (err.message && err.message.includes('formats are allowed')) {
     return res.status(400).json({ message: err.message });
   }
+  if (err.code === 'LIMIT_FILE_SIZE') {
+    return res.status(400).json({ message: 'File size must be under 50MB' });
+  }
   res.status(500).json({ message: 'Internal server error' });
 });
 
